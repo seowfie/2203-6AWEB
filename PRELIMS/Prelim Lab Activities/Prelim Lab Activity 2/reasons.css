@@ -1,0 +1,17 @@
+p {
+  font-size: 1rem;
+  text-align: justify;
+  line-height: 1.8;
+  color: #444;
+  background: #F5EEDF;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(161, 181, 193, 0.15);
+  margin-bottom: 35px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeUp 1.5s ease both;
+}
+
+.profile-section {
+  padding: 35px 0;
+}
