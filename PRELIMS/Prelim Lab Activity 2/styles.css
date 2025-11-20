@@ -1,0 +1,99 @@
+/* GLOBAL STYLES (universal) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #F5EEDF, #F9ACA7 30%, #F5EEDF 90%);
+  color: #68747D;
+  padding: 40px 0;
+  overflow-x: hidden;
+  animation: fadeInBody 1.5s ease both;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #CF365F;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #F9ACA7;
+  display: inline-block;
+  cursor: default;
+  animation: fadeUp 1.2s ease both;
+}
+
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(to right, #CF365F, #A1B5C1);
+  transition: width 0.4s ease;
+}
+
+
+.section-title:hover::after {
+  width: 100%;
+}
+
+
+
+/* Container */
+.cv-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 65px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(207, 54, 95, 0.15);
+  overflow: hidden;
+  position: relative;
+  animation: slideIn 1s ease both;
+}
+
+.cv-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 100%;
+  background: linear-gradient(180deg, #CF365F, #A1B5C1);
+  border-radius: 0 10px 10px 0;
+  animation: gradientGlow 4s ease-in-out infinite alternate;
+}
+
+/* Keyframes */
+@keyframes fadeInBody {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientGlow {
+  0% { opacity: 0.8; filter: brightness(1); }
+  100% { opacity: 1; filter: brightness(1.2); }
+}
+
+@media print {
+  body { background: none; }
+  .cv-container { box-shadow: none; border: none; padding: 20px; }
+  .section-title::after { display: none; }
+}
