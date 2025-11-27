@@ -1,0 +1,28 @@
+<div class="student-container">
+
+  <h1>{{ studentName }}</h1>
+
+  <section class="card">
+    <h2>Property Binding</h2>
+    <img [src]="imageUrl" class="student-img" />
+    <button [disabled]="isDisabled">Submit</button>
+  </section>
+
+  <section class="card">
+    <h2>Class Binding</h2>
+    <p [class.passing]="isPassing" [class.failing]="!isPassing">
+      Student Result: {{ isPassing ? 'Passed' : 'Failed'}}
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Style Binding</h2>
+    <div
+      [style.background]="boxColor"
+      [style.width]="boxSize"
+      [style.height]="boxSize"
+      class="box">
+    </div>
+  </section>
+
+</div>
