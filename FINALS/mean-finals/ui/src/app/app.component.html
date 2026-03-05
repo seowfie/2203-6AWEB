@@ -1,0 +1,121 @@
+<div class="app-container">
+
+  @if (successMessage) {
+    <div class="success-banner">
+      {{ successMessage }}
+    </div>
+  }
+
+  <h1 class="app-title">Equestria Roster</h1>
+
+  <div class="form-container">
+    <h2 class="form-title">Recruit a New Pony</h2>
+
+    <form [formGroup]="ponyForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column;">
+      <div class="form-grid">
+
+        <div class="input-wrapper">
+          <input formControlName="name" placeholder="Name (e.g. Twilight)" class="form-input">
+          @if (ponyForm.get('name')?.invalid && ponyForm.get('name')?.touched) {
+            <span class="error-text">Name is required (min 2 characters).</span>
+          }
+        </div>
+
+        <div class="input-wrapper">
+          <input formControlName="color" placeholder="Color" class="form-input">
+          @if (ponyForm.get('color')?.invalid && ponyForm.get('color')?.touched) {
+            <span class="error-text">Color is required.</span>
+          }
+        </div>
+
+        <div class="input-wrapper">
+          <select formControlName="ponyType" class="form-input" style="background-color: white;">
+            <option value="" disabled selected>Select Pony Type</option>
+            <option value="Earth">Earth Pony</option>
+            <option value="Pegasus">Pegasus</option>
+            <option value="Unicorn">Unicorn</option>
+            <option value="Alicorn">Alicorn</option>
+          </select>
+          @if (ponyForm.get('ponyType')?.invalid && ponyForm.get('ponyType')?.touched) {
+            <span class="error-text">Pony type is required.</span>
+          }
+        </div>
+
+        <div class="input-wrapper">
+          <input formControlName="elementOfHarmony" placeholder="Element (e.g. Magic)" class="form-input">
+          @if (ponyForm.get('elementOfHarmony')?.invalid && ponyForm.get('elementOfHarmony')?.touched) {
+            <span class="error-text">Element is required.</span>
+          }
+        </div>
+
+      </div>
+      <button type="submit" class="btn-add">Add Pony</button>
+    </form>
+  </div>
+
+  <div class="pony-grid">
+    @for (pony of ponies; track pony.id || pony._id) {
+      <div class="pony-card animate-fade-in">
+
+        @if (editingPonyId !== (pony.id || pony._id)) {
+          <div class="card-content">
+            <h3 class="card-title">{{ pony.name }}</h3>
+            <div class="card-details">
+              <p><span>Color:</span> {{ pony.color }}</p>
+              <p><span>Type:</span> {{ pony.ponyType }}</p>
+              <p><span>Element:</span> {{ pony.elementOfHarmony }}</p>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button (click)="startEdit(pony)" class="btn-edit">Edit</button>
+            <button (click)="deletePony(pony.id || pony._id)" class="btn-delete">Delete</button>
+          </div>
+        }
+
+        @if (editingPonyId === (pony.id || pony._id)) {
+          <div class="edit-mode-container animate-fade-in">
+            <h3 class="edit-title">Editing Details</h3>
+
+            <div class="edit-field">
+              <label>Pony Name:</label>
+              <input [(ngModel)]="editPonyData.name" placeholder="Name" class="edit-input">
+            </div>
+
+            <div class="edit-field">
+              <label>Pony Color:</label>
+              <input [(ngModel)]="editPonyData.color" placeholder="Color" class="edit-input">
+            </div>
+
+            <div class="edit-field">
+              <label>Pony Type:</label>
+              <select [(ngModel)]="editPonyData.ponyType" class="edit-input" style="background-color: white;">
+                <option value="Earth">Earth Pony</option>
+                <option value="Pegasus">Pegasus</option>
+                <option value="Unicorn">Unicorn</option>
+                <option value="Alicorn">Alicorn</option>
+              </select>
+            </div>
+
+            <div class="edit-field">
+              <label>Element of Harmony:</label>
+              <input [(ngModel)]="editPonyData.elementOfHarmony" placeholder="Element" class="edit-input">
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button (click)="cancelEdit()" class="btn-cancel">Cancel</button>
+            <button (click)="saveEdit()" class="btn-save">Save changes</button>
+          </div>
+        }
+
+      </div>
+    } @empty {
+      <div class="empty-state animate-fade-in">
+        <p>No ponies in the roster yet!</p>
+      </div>
+    }
+  </div>
+</div>
+
+<router-outlet />
